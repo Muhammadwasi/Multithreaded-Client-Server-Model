@@ -1,3 +1,83 @@
+# Multithreaded Client & Multiprocess Server Model in C
+
+## Help 
+### Server Side Commands
+
+* Listing all connections including active and non-active
+```
+list conn
+```
+
+* Listing all the process running in the each client processes
+```
+list process
+```
+
+* Exiting the server and client process on Server
+```
+exit
+```
+
+### Client Side Commands
+
+* Connecting a client to the server with the specified ip and port
+```
+connect <ip> <port>
+```
+* Disconnect a client from server , leaving the client process on client running and exiting the client process on server.
+```
+disconnect
+```
+
+* Disconnect the client from server , exiting both the client process on client and the client process on server
+```
+exit
+```
+* Request server to add numbers and response will be the result
+```
+add <number1> <number1>
+```
+* Request server to subtract numbers and response will be the result
+```
+sub <number1> <number1>
+```
+* Request server to multiply numbers and response will be the result
+```
+mult <number1> <number1>
+```
+* Request server to dividend numbers and response will be the result
+```
+div <number1> <number1>
+```
+* Print help of client side commands
+```
+help
+```
+* Run a specified program
+```
+run <program>
+```
+* List the active process(es) on the client
+```
+list
+```
+* list the all active and non-active processes on the client
+```
+list all
+```
+* Exit all the processes on the client
+```
+kill all
+```
+* Exit the process with the specified name on the client
+```
+kill <name>
+```
+* Exit the process with the specified id on the client
+```
+kill <id>
+```
+
 ## Project Architecture
 ### Server
 - Every time server starts, it creates a socket and use multiplexed I/O for two fds: one for accepting connection and one for reading from screen
@@ -6,7 +86,7 @@
   - ```list process```
   - ```exit```
 - On accepting a connection from a client, it does two things:
-  - Registers the connectionin ConnList
+  - Registers the connection in ConnList
   - Creates two pipes and Fork the process for the client
     - The client process on server now implements multiplexed I/O for reading from client socket fd and reading end of the pipe
     - The client loops indefinitely anddoes either of the following things or both:
